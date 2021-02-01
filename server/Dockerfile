@@ -13,4 +13,4 @@ USER deno
 ADD /server .
 
 # These are passed as deno arguments when run with docker:
-CMD ["run", "--allow-net", "src/main.ts"]
+CMD ["run", "--allow-all", "src/main.ts"]

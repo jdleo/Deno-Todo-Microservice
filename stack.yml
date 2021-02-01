@@ -7,6 +7,8 @@ services:
       dockerfile: ./server/Dockerfile
       network: host
     image: todo-api
+    ports:
+      - 3001:3001
 
   mongo:
     image: mongo

@@ -1,7 +1,6 @@
 version: '3.4'
 
 services:
-
   client:
     build:
       context: .
@@ -12,15 +11,13 @@ services:
       - 3000:3000
     depends_on:
       - server
-
+      
   server:
     build:
       context: .
       dockerfile: ./server/Dockerfile
       network: host
     image: todo-server
-    ports:
-      - 3001:3001
     environment:
       MONGODB_ADMINUSERNAME: root
       MONGODB_ADMINPASSWORD: example

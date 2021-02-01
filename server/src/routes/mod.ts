@@ -1,5 +1,5 @@
 import { Router } from 'https://deno.land/x/oak/mod.ts';
-import { createTodo, getTodo } from '../controller/mod.ts';
+import { createTodo, getTodo, updateTodo } from '../controller/mod.ts';
 
 // new router instance
 const router = new Router();
@@ -10,6 +10,7 @@ router
         ctx.response.body = { status: 'available' };
     })
     .post('/todos', createTodo)
-    .get('/todos/:id', getTodo);
+    .get('/todos/:id', getTodo)
+    .put('/todos/:id', updateTodo);
 
 export default router;

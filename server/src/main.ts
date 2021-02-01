@@ -1,10 +1,11 @@
-import { Application } from 'https://deno.land/x/oak/mod.ts';
+import { Application, Router } from 'https://deno.land/x/oak/mod.ts';
+import router from './routes/mod.ts';
 
-// new app instance
 const app = new Application();
 
-app.use(ctx => {
-    ctx.response.body = { hello: 'world' };
-});
+const PORT = 3001;
 
-await app.listen({ port: 3001 });
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+app.listen({ port: PORT });

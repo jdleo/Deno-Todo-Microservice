@@ -3,7 +3,7 @@ import { Todo, Bson } from '../db/mod.ts';
 const updateTodo = async (ctx: any) => {
     try {
         // attempt to get body from ctx
-        const body: any = await ctx.request.body();
+        const body: any = await ctx.request.body().value;
         // attempt to get id from ctx params
         let todoId: string = ctx.params.id;
 

@@ -1,5 +1,5 @@
 import { Router } from 'https://deno.land/x/oak/mod.ts';
-import { createTodo, getTodo, updateTodo } from '../controller/mod.ts';
+import { createTodo, getTodo, updateTodo, deleteTodo } from '../controller/mod.ts';
 
 // new router instance
 const router = new Router();
@@ -11,6 +11,7 @@ router
     })
     .post('/todos', createTodo)
     .get('/todos/:id', getTodo)
-    .put('/todos/:id', updateTodo);
+    .put('/todos/:id', updateTodo)
+    .delete('/todos/:id', deleteTodo);
 
 export default router;

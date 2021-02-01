@@ -12,6 +12,8 @@ services:
     environment:
       MONGODB_ADMINUSERNAME: root
       MONGODB_ADMINPASSWORD: example
+    depends_on:
+      - mongo
 
   mongo:
     image: mongo

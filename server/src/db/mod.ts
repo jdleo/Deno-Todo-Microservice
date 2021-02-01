@@ -9,7 +9,7 @@ const USER = Deno.env.get('MONGODB_ADMINUSERNAME');
 const PASS = Deno.env.get('MONGODB_ADMINPASSWORD');
 
 // connect to MongoDB
-client.connect(`mongodb://${USER}:${PASS}@localhost:27017`);
+await client.connect(`mongodb://${USER}:${PASS}@mongo:27017`);
 
 // database ref
 const db_name: string = 'todos';

@@ -1,4 +1,4 @@
-import { MongoClient } from 'https://deno.land/x/mongo@v0.21.0/mod.ts';
+import { MongoClient, Bson } from 'https://deno.land/x/mongo@v0.21.0/mod.ts';
 import TodoSchema from '../model/Todo.ts';
 
 // create client
@@ -18,4 +18,4 @@ const db = client.database(db_name);
 // register schema with Mongo
 const Todo = db.collection<TodoSchema>('todo');
 
-export { db, Todo };
+export { db, Todo, Bson };

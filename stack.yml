@@ -9,6 +9,9 @@ services:
     image: todo-api
     ports:
       - 3001:3001
+    environment:
+      MONGODB_ADMINUSERNAME: root
+      MONGODB_ADMINPASSWORD: example
 
   mongo:
     image: mongo

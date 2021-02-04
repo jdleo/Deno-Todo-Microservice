@@ -6,7 +6,7 @@ const app = new Application();
 
 const PORT = 3001;
 
-app.use(oakCors());
+app.use(oakCors({ origin: '*' }));
 app.use(router.routes());
 app.use(router.allowedMethods());
 

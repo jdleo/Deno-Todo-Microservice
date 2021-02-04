@@ -4,11 +4,14 @@ FROM mhart/alpine-node:12 AS builder
 # set working directory
 WORKDIR /app
 
-# copy everything from /client to working directory
-COPY /client .
+# copy package.json
+COPY /client/package.json .
 
 # install react-scripts silently with npm
 RUN npm install react-scripts -g --silent
+
+# copy everything from /client to working directory
+COPY /client .
 
 # install all other deps
 RUN yarn install

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 
 import {
@@ -38,6 +39,17 @@ function App() {
             _id: '329849238849',
         }))
     );
+
+    // component did mount
+    useEffect(() => {
+        // download existing todo items
+        axios
+            .get('server:3001/todos')
+            .then(response => {
+                console.log(response);
+            })
+            .catch(err => console.error(err));
+    }, []);
 
     const classes = useStyles();
 

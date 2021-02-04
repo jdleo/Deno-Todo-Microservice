@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './App.css';
+
+import { createPost, deletePost, getPosts } from './adapters';
 
 import {
     Typography,
@@ -16,11 +17,6 @@ const useStyles = makeStyles({
     root: {
         minWidth: 275,
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
     title: {
         fontSize: 14,
     },
@@ -32,24 +28,22 @@ const useStyles = makeStyles({
 function App() {
     // state mgmt
     const [text, setText] = useState('');
-    const [todos, setTodos] = useState(
-        Array.from({ length: 20 }, () => ({
-            created_at: 3928749872323,
-            text: 'hello this is a todo item',
-            _id: '329849238849',
-        }))
-    );
+    const [todos, setTodos] = useState([]);
 
     // component did mount
     useEffect(() => {
-        // download existing todo items
-        axios
-            .get('server:3001/todos')
-            .then(response => {
-                console.log(response);
-            })
-            .catch(err => console.error(err));
+        // download existing todos
+        (async () => setTodos(await getPosts()))();
     }, []);
+
+    // to handle new todo
+    const handleNewTodo = async () => {
+        // make sure there is text content
+        if (text.trim() !== '') {
+            // create new todo
+            await crea;
+        }
+    };
 
     const classes = useStyles();
 

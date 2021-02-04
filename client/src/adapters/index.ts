@@ -1,5 +1,5 @@
-import createPost from './createPost';
-import getPosts from './getPosts';
-import deletePost from './deletePost';
+import createTodo from './createTodo';
+import getTodos from './getTodos';
+import deleteTodo from './deleteTodo';
 
-export { createPost, getPosts, deletePost };
+export { createTodo, getTodos, deleteTodo };

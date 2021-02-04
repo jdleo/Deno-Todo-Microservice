@@ -18,6 +18,8 @@ services:
       dockerfile: ./server/Dockerfile
       network: host
     image: todo-server
+    ports:
+      - 3001:3001
     environment:
       MONGODB_ADMINUSERNAME: root
       MONGODB_ADMINPASSWORD: example

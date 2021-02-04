@@ -9,12 +9,11 @@ COPY /client/package.json .
 
 # install react-scripts silently with npm
 RUN npm install react-scripts -g --silent
+# install all other deps
+RUN yarn install
 
 # copy everything from /client to working directory
 COPY /client .
-
-# install all other deps
-RUN yarn install
 
 # build
 RUN yarn run build

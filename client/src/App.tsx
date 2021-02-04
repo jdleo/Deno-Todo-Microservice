@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-import { createPost, deletePost, getPosts } from './adapters';
+import { createTodo, deleteTodo, getTodos } from './adapters';
 
 import {
     Typography,
@@ -12,6 +12,7 @@ import {
     CardContent,
     makeStyles,
 } from '@material-ui/core';
+import { ITodo } from './models';
 
 const useStyles = makeStyles({
     root: {
@@ -28,12 +29,19 @@ const useStyles = makeStyles({
 function App() {
     // state mgmt
     const [text, setText] = useState('');
-    const [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useState<ITodo[] | []>([]);
+
+    // helper method to retrieve todos
+    const retrieveTodos = async () => {
+        // reload todos
+        const res = await getTodos();
+        setTodos(res.data);
+    };
 
     // component did mount
     useEffect(() => {
         // download existing todos
-        (async () => setTodos(await getPosts()))();
+        retrieveTodos();
     }, []);
 
     // to handle new todo
@@ -41,8 +49,20 @@ function App() {
         // make sure there is text content
         if (text.trim() !== '') {
             // create new todo
-            await crea;
+            await createTodo(text);
+            // reload todos
+            retrieveTodos();
+            // clear text field
+            setText('');
         }
+    };
+
+    // to handle delete todo
+    const handleDeleteTodo = async (id: string) => {
+        // delete  todo
+        await deleteTodo(id);
+        // reload todos
+        retrieveTodos();
     };
 
     const classes = useStyles();
@@ -68,12 +88,15 @@ function App() {
                 color="primary"
                 style={{ marginTop: 20, maxWidth: '50%' }}
                 fullWidth
+                onClick={() => handleNewTodo()}
             >
                 Create
             </Button>
             <div style={{ marginTop: 20 }}>
-                {todos.map(todo => (
+                {/** @ts-expect-error */}
+                {todos.map((todo: ITodo) => (
                     <Card
+                        key={todo._id}
                         className={classes.root}
                         variant="outlined"
                         style={{ marginLeft: '25%', width: '50%', marginTop: 20 }}
@@ -91,7 +114,12 @@ function App() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small" variant="contained" color="secondary">
+                            <Button
+                                size="small"
+                                variant="contained"
+                                color="secondary"
+                                onClick={() => handleDeleteTodo(todo._id)}
+                            >
                                 delete
                             </Button>
                         </CardActions>
